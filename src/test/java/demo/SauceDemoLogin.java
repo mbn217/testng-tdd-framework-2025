@@ -10,7 +10,7 @@ import org.testng.annotations.Test;
 public class SauceDemoLogin {
 
     @Test
-    public void loginWithValidUserNameAndPassword() throws InterruptedException {
+    public void loginWithValidUserNameAndPassword(){
 
         /**
          * 1.	Navigate to sauce demo login page.
@@ -22,32 +22,25 @@ public class SauceDemoLogin {
 
         WebDriver driver = new ChromeDriver();
         driver.get("https://www.saucedemo.com/");
-
-        WebElement username = driver.findElement(By.xpath("//input[@id='user-name']"));
+        WebElement userName = driver.findElement(By.xpath("//input[@id='user-name']"));
         WebElement password = driver.findElement(By.xpath("//input[@id='password']"));
         WebElement loginButton = driver.findElement(By.xpath("//input[@id='login-button']"));
 
 
-        username.sendKeys("standard_user");
+        userName.sendKeys("standard_user");
         password.sendKeys("secret_sauce");
         loginButton.click();
 
-        Thread.sleep(4000);
-
-        String expectedLabel = "Products";
-
-        Thread.sleep(2000);
+        String expectedLabel = "Products"; //This is coming from requirement doc
         WebElement productLabel = driver.findElement(By.xpath("//span[text()='Products']"));
-        String actualLabel = productLabel.getText(); //coming from the UI
-
-
+        String actualLabel = productLabel.getText();
 
         Assert.assertEquals(actualLabel, expectedLabel);
+
         driver.quit();
 
 
     }
-
 
 
 
